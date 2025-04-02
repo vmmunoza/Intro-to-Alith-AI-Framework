@@ -1,10 +1,7 @@
-Below is a **final** markdown text you can copy/paste directly into your README file. It contains **short code snippets** (rather than the entire scripts) and **corrected Mermaid diagrams** to avoid rendering errors.
-
----
 
 # Intro-to-Alith-AI-Framework
 
-Welcome to the introductory workshop for the **Alith AI Agent Framework**. This repository is designed to help you learn how AI agents work in general, understand what makes the Alith framework unique, and explore practical code examples in Python.
+Introductory workshop to start working with the **Alith AI Agent Framework**. This repository is designed to help you learn how AI agents work in general, understand what makes the Alith framework unique, and explore practical code examples in Python.
 
 ---
 
@@ -178,6 +175,4 @@ flowchart TD
 
 For more details, installation guides, and advanced usage examples, please refer to our [Alith Documentation](https://alith.lazai.network/docs).
 
----
 
-Happy coding and enjoy exploring the capabilities of the Alith AI Agent Framework!
