@@ -27,11 +27,11 @@ Introductory workshop to start working with the **Alith AI Agent Framework**. Th
 
 ## What is the Alith AI Agent Framework?
 
-The **Alith AI Agent Framework** is a multi-language toolkit designed for building intelligent agents. It streamlines the process of integrating advanced AI models (such as GPT-4) with blockchain components, providing a seamless development experience. Whether you’re building intelligent assistants, integrating with existing tools, or experimenting with language models, Alith makes it easy with support for Rust, Python, and Node.js.
+The **Alith AI Agent Framework** is a multi-language toolkit designed for building intelligent agents. Alith lets you create AI agents (like bots, assistants, or decision-makers) that can reason, access external tools, remember things, and interact with users or blockchains while giving developers full control over logic, models, memory, and data privacy.
 
 ---
 
-## Why Alith is Unique
+## Why Alith?
 
 - **Multi-Language Integration:** Write and deploy AI agents using your language of choice.  
 - **Blockchain-Ready:** Easily integrate with decentralized systems and smart contracts.  
@@ -69,7 +69,8 @@ $env:OPENAI_API_KEY = "your-api-key"
 
 ---
 
-For full details and Python/Node.js usage, please refer to the [Alith Documentation](https://alith.lazai.network/docs).
+For full details and Rust/Node.js usage, please refer to the [Alith Documentation](https://alith.lazai.network/docs).
+For reference about full implementation of the telegram bot, please refer to [this Repo](https://github.com/metis-edu/Alith-AI-Agent-demo).
 
 ---
 
