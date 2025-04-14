@@ -43,17 +43,31 @@ The **Alith AI Agent Framework** is a multi-language toolkit designed for buildi
 
 ## Installation & Quick Start
 
-### Installing Alith via Cargo (Rust)
+---
+
+### Installing Alith (Python)
+
+To get started with the Alith framework using Python, first ensure you have Python 3.8+ installed.
+
+Install the Alith SDK via pip:
+
 ```bash
-cargo add alith
-# Or install directly from GitHub:
-cargo add alith --git https://github.com/0xLazAI/alith
+pip install alith
 ```
 
-Make sure to install other dependencies as needed:
+If you’re running the example with OpenAI or another model provider, set your API key as an environment variable:
+
+**Unix/macOS**
 ```bash
-cargo add tokio async_trait schemars serde anyhow
+export OPENAI_API_KEY="your-api-key"
 ```
+
+**Windows (Powershell)**
+```powershell
+$env:OPENAI_API_KEY = "your-api-key"
+```
+
+---
 
 For full details and Python/Node.js usage, please refer to the [Alith Documentation](https://alith.lazai.network/docs).
 
@@ -61,7 +75,7 @@ For full details and Python/Node.js usage, please refer to the [Alith Documentat
 
 ## Code Walkthrough
 
-### test_alith.py (Snippet)
+### test_alith.py 
 
 This script shows how to create a simple AI agent using GPT-4 with a comedic role. It initializes the agent, sends a prompt, and prints the response.
 
@@ -167,7 +181,6 @@ flowchart TD
     F --> G([Telegram Bot Sends Response])
 ```
 
-> **Note**: If your markdown viewer or platform doesn’t support Mermaid, consider installing a Mermaid plugin or using a platform like GitHub that renders these diagrams automatically.
 
 ---
 
