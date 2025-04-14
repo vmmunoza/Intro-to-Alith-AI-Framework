@@ -216,7 +216,7 @@ ERC1155_BYTECODE = "0x608060405234801561001057600080fd5b506040516109..."  # Repl
 # Initialize Alith Agent
 agent = Agent(
     name="Telegram Bot Agent",
-    model="gpt-4",
+    model="gpt-4", 
     preamble="""You are an advanced AI assistant built by [Alith](https://github.com/0xLazAI/alith).""",
 )
 
