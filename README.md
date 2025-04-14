@@ -12,9 +12,9 @@ Introductory workshop to start working with the **Alith AI Agent Framework**. Th
 - [Why Alith is Unique](#why-alith-is-unique)
 - [Installation & Quick Start](#installation--quick-start)
 - [Code Walkthrough](#code-walkthrough)
-  - [test_alith.py (Snippet)](#test_alithpy-snippet)
+  - [test_alith.py ](#test_alithpy-snippet)
   - [tg-bot.py (Snippet)](#tg-botpy-snippet)
-- [Diagrams & Visual Aids](#diagrams--visual-aids)
+- [Diagrams](#diagrams--visual-aids)
 - [Further Documentation](#further-documentation)
 
 ---
