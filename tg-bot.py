@@ -1,3 +1,105 @@
+# === PART 1: Imports and Environment Setup ===
+import os
+import json
+from dotenv import load_dotenv
+
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import (
+    Application, CommandHandler, MessageHandler, filters,
+    CallbackContext, CallbackQueryHandler
+)
+
+from alith import Agent
+from web3 import Web3
+from eth_account import Account
+
+load_dotenv()
+
+# === PART 2: Metis Sepolia Network Configuration ===
+METIS_SEPOLIA_CONFIG = {
+    'chain_id': 59902,
+    'rpc_url': 'https://sepolia.metisdevops.link',
+    'explorer_url': 'https://sepolia-explorer.metisdevops.link',
+    'name': 'Metis Sepolia'
+}
+
+w3 = Web3(Web3.HTTPProvider(METIS_SEPOLIA_CONFIG['rpc_url']))
+
+# === PART 3: Smart Contract ABIs (Simplified) ===
+ERC20_ABI = '[{"name": "name", "outputs": [{"type": "string"}], "stateMutability": "view", "type": "function"}, {"name": "symbol", "outputs": [{"type": "string"}], "stateMutability": "view", "type": "function"}, {"name": "decimals", "outputs": [{"type": "uint8"}], "stateMutability": "view", "type": "function"}, {"name": "totalSupply", "outputs": [{"type": "uint256"}], "stateMutability": "view", "type": "function"}, {"name": "balanceOf", "inputs": [{"name": "account", "type": "address"}], "outputs": [{"type": "uint256"}], "stateMutability": "view", "type": "function"}]'
+ERC721_ABI = '[{"name": "name", "outputs": [{"type": "string"}], "stateMutability": "view", "type": "function"}, {"name": "symbol", "outputs": [{"type": "string"}], "stateMutability": "view", "type": "function"}]'
+ERC1155_ABI = '[{"name": "uri", "outputs": [{"type": "string"}], "stateMutability": "view", "type": "function"}]'
+
+ERC20_BYTECODE = "0x..."  # Replace with actual bytecode
+ERC721_BYTECODE = "0x..."
+ERC1155_BYTECODE = "0x..."
+
+# === PART 4: Alith Agent Initialization ===
+agent = Agent(
+    name="Telegram Bot Agent",
+    model="gpt-4",
+    preamble="You are an advanced AI assistant built with Alith."
+)
+
+# === PART 5: Telegram Bot Initialization ===
+bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+app = Application.builder().token(bot_token).build()
+user_states = {}
+
+# === PART 6: Helper Functions ===
+def is_valid_address(address: str) -> bool:
+    return address.startswith('0x') and len(address) == 42
+
+async def check_balance(contract_address: str, wallet_address: str) -> str:
+    try:
+        if not is_valid_address(contract_address) or not is_valid_address(wallet_address):
+            return "Invalid address format."
+
+        contract = w3.eth.contract(
+            address=Web3.to_checksum_address(contract_address),
+            abi=json.loads(ERC20_ABI)
+        )
+
+        symbol = contract.functions.symbol().call()
+        balance = contract.functions.balanceOf(Web3.to_checksum_address(wallet_address)).call()
+        return f"Wallet Balance: {balance} {symbol}"
+    except Exception as e:
+        return f"Error checking balance: {str(e)}"
+
+# === PART 7: Telegram Message Handler ===
+async def handle_message(update: Update, context: CallbackContext):
+    chat_id = update.effective_chat.id
+    message = update.message.text.strip()
+
+    if message.lower() in ["hi", "hello"]:
+        await context.bot.send_message(chat_id=chat_id, text="👋 Hello! I can help you deploy a token or check balances.")
+        return
+
+    if message.startswith("/balance"):
+        params = message.split()
+        if len(params) == 3:
+            _, contract_address, wallet_address = params
+            result = await check_balance(contract_address, wallet_address)
+            await context.bot.send_message(chat_id=chat_id, text=result)
+            return
+        else:
+            await context.bot.send_message(chat_id=chat_id, text="Usage: /balance <token> <wallet>")
+            return
+
+    # Default fallback to AI agent
+    response = agent.prompt(message)
+    await context.bot.send_message(chat_id=chat_id, text=response)
+
+# === PART 8: Telegram Command Registration ===
+app.add_handler(CommandHandler("balance", handle_message))
+app.add_handler(MessageHandler(filters.TEXT & (~filters.COMMAND), handle_message))
+
+# === PART 9: Launch the Bot ===
+if __name__ == "__main__":
+    print("🤖 Bot is running on Metis Sepolia...")
+    app.run_polling()
+
+"""
 import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
