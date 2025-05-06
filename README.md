@@ -45,13 +45,13 @@ The **Alith AI Agent Framework** is a multi-language toolkit designed for buildi
 
 ---
 
-### Installing Alith (Python)
+### Installing Alith (Python version)
 
 To get started with the Alith framework using Python, first ensure you have Python 3.8+ installed.
 
 Install the Alith SDK via pip:
 
-```bash
+```
 pip install alith
 ```
 
